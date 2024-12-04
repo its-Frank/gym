@@ -1,34 +1,186 @@
 {% extends 'gym/base.html' %} {% block content %}
-<div class="row">
-  <div class="col-md-8 offset-md-2">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h2 class="mb-0">
-          <i class="fas fa-user"></i> Welcome, {{ user.username }}
-        </h2>
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h6 data-aos="fade-up" data-aos-delay="300">
+          Welcome to Gym Management
+        </h6>
+        <h1
+          class="display-4 text-white mb-4"
+          data-aos="fade-up"
+          data-aos-delay="500"
+        >
+          Transform Your Fitness Journey
+        </h1>
+
+        {% if not user.is_authenticated %}
+        <div data-aos="fade-up" data-aos-delay="600">
+          <a href="{% url 'register' %}" class="btn custom-btn me-3">
+            <i class="fas fa-user-plus me-2"></i>Register Now
+          </a>
+          <a href="{% url 'login' %}" class="btn custom-btn">
+            <i class="fas fa-sign-in-alt me-2"></i>Login
+          </a>
+        </div>
+        {% else %}
+        <div data-aos="fade-up" data-aos-delay="600">
+          <a href="{% url 'book_appointment' %}" class="btn custom-btn me-3">
+            <i class="fas fa-calendar-check me-2"></i>Book Appointment
+          </a>
+          <a href="{% url 'schedule_session' %}" class="btn custom-btn">
+            <i class="fas fa-clock me-2"></i>Schedule Session
+          </a>
+        </div>
+        {% endif %}
       </div>
-      <div class="card-body">
-        <p class="card-text">
-          Welcome to our Gym Management System. Here you can easily manage your
-          fitness journey.
+    </div>
+  </div>
+</section>
+<!-- ABOUT SECTION -->
+{% load static %}
+
+<section class="section" id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h2>About Our Gym Management System</h2>
+        <p>
+          Our platform is designed to make your fitness journey seamless and
+          enjoyable. With easy appointment booking, personalized session
+          scheduling, and comprehensive fitness tracking, we're here to support
+          your health and wellness goals.
         </p>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <a
-              href="{% url 'book_appointment' %}"
-              class="btn btn-success w-100"
-            >
-              <i class="fas fa-calendar-check"></i> Book Appointment
-            </a>
+        <ul class="list-unstyled">
+          <li>
+            <i class="fas fa-check text-primary me-2"></i>Book Appointments with
+            Ease
+          </li>
+          <li>
+            <i class="fas fa-check text-primary me-2"></i>Personalized Training
+            Sessions
+          </li>
+          <li>
+            <i class="fas fa-check text-primary me-2"></i>Track Your Fitness
+            Progress
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <img
+          src="{% static 'images/about1.jpg' %}"
+          class="img-fluid rounded"
+          alt="Gym Facility"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CLASSES SECTION -->
+<section class="section bg-light" id="classes">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 data-aos="fade-up">Our Fitness Classes</h2>
+      <p data-aos="fade-up" data-aos-delay="200">
+        Explore our diverse range of fitness classes
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-4" data-aos="fade-up">
+        <div class="card mb-4">
+          <img
+            src="{% static 'images/yoga1.jpg' %}"
+            class="card-img-top"
+            alt="Yoga Class"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Yoga</h5>
+            <p class="card-text">
+              Improve flexibility, strength, and mental well-being.
+            </p>
           </div>
-          <div class="col-md-6 mb-3">
-            <a href="{% url 'schedule_session' %}" class="btn btn-info w-100">
-              <i class="fas fa-clock"></i> Schedule Session
-            </a>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card mb-4">
+          <img
+            src="{% static 'images/crossfit.jpg' %}"
+            class="card-img-top"
+            alt="Crossfit Class"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Crossfit</h5>
+            <p class="card-text">
+              High-intensity functional training for total body fitness.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+        <div class="card mb-4">
+          <img
+            src="{% static 'images/cardio.jpg' %}"
+            class="card-img-top"
+            alt="Cardio Class"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Cardio</h5>
+            <p class="card-text">
+              Cardiovascular exercises to improve endurance and heart health.
+            </p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+<!-- CONTACT SECTION -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h2>Contact Us</h2>
+        <p>Have questions or need more information? Reach out to us!</p>
+        <div class="contact-info">
+          <p>
+            <i class="fas fa-map-marker-alt me-2"></i>123 Fitness Street, Gym
+            City
+          </p>
+          <p><i class="fas fa-phone me-2"></i>(555) 123-4567</p>
+          <p><i class="fas fa-envelope me-2"></i>support@gymmanagement.com</p>
+        </div>
+      </div>
+      <div class="col-lg-6" data-aos="fade-left">
+        <form>
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Your Name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Your Email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Your Message"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn custom-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
