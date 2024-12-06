@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gym Management System</title>
+    <title>City Gym</title>
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -12,16 +12,13 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-
     <!-- Font Awesome for icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
     <style>
       body {
         font-family: "Arial", sans-serif;
@@ -65,6 +62,43 @@
         background-color: #ffca28;
         transform: translateY(-5px);
       }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      .login-container {
+        padding-top: 50px;
+      }
+      .register-container {
+        padding-top: 50px;
+      }
+      .about-section {
+        background-color: #f8f9fa;
+        padding-top: 30px;
+      }
+      .feature-list li {
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+      }
+      .feature-list i {
+        font-size: 1.5rem;
+      }
+      .schedule-session-container {
+        padding-top: 60px;
+      }
+      .book-appointment-container {
+        padding-top: 60px;
+      }
+      .trainee-dashboard-container {
+        padding-top: 100px;
+      }
+      .profile-info {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+      }
     </style>
   </head>
   <body data-bs-spy="scroll" data-bs-target="#mainNav">
@@ -72,7 +106,7 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="mainNav">
       <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">
-          <i class="fas fa-dumbbell"></i> Gym Management
+          <i class="fas fa-dumbbell"></i> City Gym
         </a>
         <button
           class="navbar-toggler"
@@ -85,10 +119,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#home">Home</a>
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+              <a class="nav-link" href="{% url 'about' %}">About</a>
             </li>
             {% if not user.is_authenticated %}
             <li class="nav-item">
@@ -111,10 +145,21 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
-            {% endif %}
-
+            {% endif %} {% if user.is_authenticated %} {% if user.is_staff %}
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
+              <a class="nav-link" href="{% url 'trainer_dashboard' %}"
+                >Trainer Dashboard</a
+              >
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'trainee_dashboard' %}"
+                >Trainee Dashboard</a
+              >
+            </li>
+            {% endif %} {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contact' %}">Contact</a>
             </li>
           </ul>
         </div>
@@ -122,11 +167,10 @@
     </nav>
     <!-- MAIN CONTENT -->
     {% block content %}{% endblock %}
-
     <!-- FOOTER -->
     <footer class="bg-dark text-white text-center py-4">
       <div class="container">
-        <p>&copy; 2024 Gym Management System. All Rights Reserved.</p>
+        <p>&copy; 2024 City Gym Management System. All Rights Reserved.</p>
         <div class="social-icons mt-3">
           <a href="#" class="text-white mx-2"
             ><i class="fab fa-facebook-f"></i
@@ -145,7 +189,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-
     <!-- AOS Animation Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

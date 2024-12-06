@@ -1,43 +1,85 @@
 {% extends 'gym/base.html' %} {% block content %}
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="card">
-      <div class="card-header bg-primary text-white">
-        <h2 class="text-center mb-0">Register</h2>
-      </div>
-      <div class="card-body">
-        <form method="post">
-          {% csrf_token %} {% for field in form %}
-          <div class="mb-3">
-            <label for="{{ field.id_for_label }}" class="form-label"
-              >{{ field.label }}</label
-            >
-            <div class="input-group">
-              <span class="input-group-text">
-                {% if field.name == 'username' %}<i class="fas fa-user"></i> {%
-                elif field.name == 'password1' %}<i class="fas fa-lock"></i> {%
-                elif field.name == 'password2' %}<i class="fas fa-lock"></i>
+<div class="register-container min-vh-100 d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0">
+          <div class="card-header bg-primary text-white py-3">
+            <h2 class="card-title text-center mb-0">Register</h2>
+          </div>
+          <div class="card-body p-4">
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                {{ form.username }} {% if form.username.errors %}
+                <div class="text-danger">{{ form.username.errors }}</div>
                 {% endif %}
-              </span>
-              {{ field }}
-            </div>
-            {% if field.errors %}
-            <div class="text-danger">
-              {% for error in field.errors %} {{ error }} {% endfor %}
-            </div>
-            {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_password1" class="form-label">Password</label>
+                {{ form.password1 }} {% if form.password1.errors %}
+                <div class="text-danger">{{ form.password1.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_password2" class="form-label"
+                  >Confirm Password</label
+                >
+                {{ form.password2 }} {% if form.password2.errors %}
+                <div class="text-danger">{{ form.password2.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Role</label>
+                <div class="d-flex">
+                  {% for choice in form.role %}
+                  <div class="form-check me-4">
+                    {{ choice.tag }}
+                    <label
+                      class="form-check-label"
+                      for="{{ choice.id_for_label }}"
+                    >
+                      {{ choice.choice_label }}
+                    </label>
+                  </div>
+                  {% endfor %}
+                </div>
+                {% if form.role.errors %}
+                <div class="text-danger">{{ form.role.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_specialization" class="form-label">
+                  Specialization (required if registering as a trainer)
+                </label>
+                {{ form.specialization }} {% if form.specialization.errors %}
+                <div class="text-danger">{{ form.specialization.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_age" class="form-label">
+                  Age (optional for trainees)
+                </label>
+                {{ form.age }} {% if form.age.errors %}
+                <div class="text-danger">{{ form.age.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_fitness_goal" class="form-label">
+                  Fitness Goal (optional for trainees)
+                </label>
+                {{ form.fitness_goal }} {% if form.fitness_goal.errors %}
+                <div class="text-danger">{{ form.fitness_goal.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary py-2">
+                  Register
+                </button>
+              </div>
+            </form>
           </div>
-          {% endfor %}
-          <div class="d-grid">
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-user-plus"></i> Register
-            </button>
-          </div>
-        </form>
-        <div class="text-center mt-3">
-          <p>
-            Already have an account? <a href="{% url 'login' %}">Login here</a>
-          </p>
         </div>
       </div>
     </div>

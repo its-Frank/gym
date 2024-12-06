@@ -55,7 +55,7 @@ ROOT_URLCONF = 'gym_management.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["gym\\base.html" "gym\\home.html" "gym\\login.html" "gym\\register.html" "gym\\book_appointment.html" "gym\\schedule_session.html"],
+        'DIRS': ["gym\\base.html" "gym\\home.html" "gym\\login.html" "gym\\register.html" "gym\\book_appointment.html" "gym\\schedule_session.html" "gym\\trainee_dashboard.html" "gym\\trainer_dashboard.html" "gym\\update_session.html" "gym\\edit_appointment.html"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +69,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gym_management.wsgi.application'
+
+# settings.py  
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 
 # Database
@@ -122,9 +125,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

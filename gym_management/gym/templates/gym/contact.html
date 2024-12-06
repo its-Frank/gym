@@ -1,0 +1,61 @@
+{% extends 'gym/base.html' %} {% block content %}
+<section class="section" id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Contact Us</h2>
+        <p>Have questions or need more information? Reach out to us!</p>
+        <div class="contact-info">
+          <p>
+            <i class="fas fa-map-marker-alt me-2"></i>123 Fitness Street, Gym
+            City
+          </p>
+          <p><i class="fas fa-phone me-2"></i>(555) 123-4567</p>
+          <p><i class="fas fa-envelope me-2"></i>support@gymmanagement.com</p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        {% if messages %}
+        <div class="alert alert-success">
+          {% for message in messages %} {{ message }} {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="POST">
+          <!-- Make sure the form works properly -->
+          {% csrf_token %}
+          <!-- Include CSRF token for security -->
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              placeholder="Your Name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              placeholder="Your Email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              class="form-control"
+              name="message"
+              rows="4"
+              placeholder="Your Message"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn custom-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

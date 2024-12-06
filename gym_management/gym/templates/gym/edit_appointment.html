@@ -1,0 +1,56 @@
+{% extends 'gym/base.html' %} {% block content %}
+<div class="edit-appointment-container min-vh-100 d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0">
+          <div class="card-header bg-primary text-white py-3">
+            <h2 class="card-title text-center mb-0">Edit Appointment</h2>
+          </div>
+          <div class="card-body p-4">
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="id_appointment_date" class="form-label"
+                  >Date and Time</label
+                >
+                {{ form.appointment_date }} {% if form.appointment_date.errors
+                %}
+                <div class="text-danger">
+                  {{ form.appointment_date.errors }}
+                </div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_trainer" class="form-label">Trainer</label>
+                {{ form.trainer }} {% if form.trainer.errors %}
+                <div class="text-danger">{{ form.trainer.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_category" class="form-label"
+                  >Fitness Category</label
+                >
+                {{ form.category }} {% if form.category.errors %}
+                <div class="text-danger">{{ form.category.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="mb-3">
+                <label for="id_notes" class="form-label"
+                  >Additional Notes (Optional)</label
+                >
+                {{ form.notes }}
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary py-2">
+                  <i class="fas fa-save me-2"></i> Update Appointment
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

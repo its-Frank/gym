@@ -1,7 +1,102 @@
 {% extends 'gym/base.html' %} {% block content %}
-<h2>Schedule Session</h2>
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn btn-primary">Schedule</button>
-</form>
+<div class="schedule-session-container min-vh-100 d-flex align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0">
+          <div class="card-header bg-primary text-white py-3">
+            <h2 class="card-title text-center mb-0">Schedule Session</h2>
+          </div>
+          <div class="card-body p-4">
+            <form method="post">
+              {% csrf_token %}
+              <div class="mb-3">
+                <label for="id_trainer" class="form-label">Trainer</label>
+                {{ form.trainer }} {% if form.trainer.errors %}
+                <div class="text-danger">{{ form.trainer.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="id_start_time" class="form-label"
+                    >Start Time</label
+                  >
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="id_start_time"
+                    name="start_time"
+                    required
+                  />
+                  {% if form.start_time.errors %}
+                  <div class="text-danger">{{ form.start_time.errors }}</div>
+                  {% endif %}
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="id_end_time" class="form-label">End Time</label>
+                  <input
+                    type="time"
+                    class="form-control"
+                    id="id_end_time"
+                    name="end_time"
+                    required
+                  />
+                  {% if form.end_time.errors %}
+                  <div class="text-danger">{{ form.end_time.errors }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="id_description" class="form-label"
+                  >Description</label
+                >
+                <textarea
+                  class="form-control"
+                  id="id_description"
+                  name="description"
+                  rows="3"
+                  required
+                ></textarea>
+                {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors }}</div>
+                {% endif %}
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary py-2">
+                  <i class="fas fa-calendar-check me-2"></i> Schedule Session
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        {% if messages %}
+        <div
+          class="alert alert-success alert-dismissible fade show mt-3 d-none"
+          role="alert"
+          id="success-message"
+        >
+          {% for message in messages %} {{ message }} {% endfor %}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var successMessage = document.getElementById("success-message");
+    if (successMessage) {
+      successMessage.classList.remove("d-none");
+      setTimeout(function () {
+        successMessage.classList.add("d-none");
+      }, 3000);
+    }
+  });
+</script>
 {% endblock %}
